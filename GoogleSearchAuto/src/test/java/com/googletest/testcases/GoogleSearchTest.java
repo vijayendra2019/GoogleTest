@@ -24,6 +24,7 @@ public class GoogleSearchTest {
 
 	public String baseUrl = "http://www.google.com";
 	public WebDriver driver;
+	public WebDriver Wait;
 
 	@AfterMethod 
 	public void terminateBrowser() {
@@ -33,8 +34,7 @@ public class GoogleSearchTest {
 
 	@BeforeMethod
 	public void launchBrowser() {
-		System.out.println("launching chrome browser");
-		System.setProperty("webdriver.chrome.driver",
+				System.setProperty("webdriver.chrome.driver",
 				System.getProperty("user.dir") + "\\src\\test\\resources\\executables\\chromedriver.exe");
 		driver = new ChromeDriver();
 		driver.get(baseUrl);
@@ -48,7 +48,7 @@ public class GoogleSearchTest {
 		Assert.assertEquals(actualTitle, expectedTitle);
 	}
 
-	@Test(priority = 2) // Test case 1
+	@Test(priority = 2) // Test case 1(A normal Search - Positive flow)
 	public void googleTestSearch() {
 
 		System.out.println("Wait for the page to load");
@@ -61,7 +61,7 @@ public class GoogleSearchTest {
 		SearchTextUtil.getSearchResults("test", driver);
 	}
 
-	@Test(priority = 3) // Test case 2
+	@Test(priority = 3) // Test case 2(Using Special Character like ':')
 	public void googleTestSearchSpecialCharacter() {
 
 		System.out.println("Wait for the page to load");
@@ -72,7 +72,7 @@ public class GoogleSearchTest {
 		SearchTextUtil.getSearchResults(":", driver);
 	}
 
-	@Test(priority = 4) // Test case 3
+	@Test(priority = 4) // Test case 3 (using a adhoc search like ggl instead of google)
 	public void googleRelativeTestSearch() {
 
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
